@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import ButtonSample3 from './Components/ButtonFormTailwind'
 import Dashboard from './Components/DashboardTemplate'
+import HeroSection from './Components/HeroSection'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -32,6 +33,7 @@ function App() {
       <Button13/>
       <Button14/>
       <Button15/> */}
+      <HeroSection/>
       
     </div>
   )
