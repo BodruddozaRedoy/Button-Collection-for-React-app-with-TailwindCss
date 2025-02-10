@@ -30,6 +30,14 @@ const navLinks = [
         link:"/product-details",
         title:"Product Details"
     },
+    {
+        link:"/cards",
+        title:"Cards"
+    },
+    {
+        link:"/testimonials",
+        title:"Testimonials"
+    },
     
 ]
 
