@@ -1,49 +1,61 @@
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 
-export const Nav = () => {
-  return (
-    <div className="bg-neutral-100 py-20">
-      <SlideTabs />
-    </div>
-  );
-};
+// export const Nav = () => {
+//   return (
+//     <div className="bg-neutral-100 py-20">
+//       <SlideTabs />
+//     </div>
+//   );
+// };
 
-const SlideTabs = () => {
+const navList = [
+  {title: "Home"},
+  {title: "All Foods"},
+  {title: "Gallery"},
+]
+
+export const Nav = () => {
   const [position, setPosition] = useState({
     left: 0,
     width: 0,
     opacity: 0,
   });
-
+  const [nav, setNav] = useState("Home")
   return (
     <ul
-      onMouseLeave={() => {
+      onCanPlay={() => {
         setPosition((pv) => ({
           ...pv,
           opacity: 0,
         }));
       }}
-      className="relative mx-auto flex w-fit rounded-full border-2 border-black bg-white p-1"
+      className="relative mx-auto flex w-fit rounded-full font-poppins select-none bg-white p-1"
     >
-      <Tab setPosition={setPosition}>Home</Tab>
-      <Tab setPosition={setPosition}>Pricing</Tab>
+      {
+        navList.map(({title}) => (
+
+          <div onClick={() => setNav(title === "Home" ? "Home" : "")}><Tab nav={nav} setPosition={setPosition}>{title}</Tab></div>
+        ))
+      }
+      {/* <Tab setPosition={setPosition}>Pricing</Tab>
       <Tab setPosition={setPosition}>Features</Tab>
       <Tab setPosition={setPosition}>Docs</Tab>
-      <Tab setPosition={setPosition}>Blog</Tab>
+      <Tab setPosition={setPosition}>Blog</Tab> */}
 
       <Cursor position={position} />
     </ul>
   );
 };
 
-const Tab = ({ children, setPosition }) => {
+const Tab = ({ children, setPosition, nav }) => {
   const ref = useRef(null);
+
 
   return (
     <li
       ref={ref}
-      onMouseEnter={() => {
+      onClick={() => {
         if (!ref?.current) return;
 
         const { width } = ref.current.getBoundingClientRect();
@@ -54,7 +66,7 @@ const Tab = ({ children, setPosition }) => {
           opacity: 1,
         });
       }}
-      className="relative z-10 block cursor-pointer px-3 py-1.5 text-xs uppercase text-white mix-blend-difference md:px-5 md:py-3 md:text-base"
+      className={` relative z-10 block cursor-pointer px-3 py-1.5 text-xs uppercase font-semibold text-black md:px-5 md:py-3 md:text-base`}
     >
       {children}
     </li>
@@ -67,7 +79,7 @@ const Cursor = ({ position }) => {
       animate={{
         ...position,
       }}
-      className="absolute z-0 h-7 rounded-full bg-black md:h-12"
+      className={` absolute z-0 h-7 rounded-full bg-red-500 !text-white  md:h-12`}
     />
   );
 };
